@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/User";
-import OTP from "../models/OTP";
+import {User} from "../models/user.model.js";
+
 
 const getRandomColor = () => {
     const colors = ["red", "blue", "green", "purple", "orange"];
@@ -12,7 +12,7 @@ export const signUp = async (req, res) => {
     try {
         const { name, email, password, accountType, otp } = req.body;
 
-        if (!name || !email || !password || !accountType || !otp) {
+        if (!name || !email || !password || !accountType) {
             return res.status(403).json({
                 success: false,
                 message: "All fields are required",
@@ -27,18 +27,6 @@ export const signUp = async (req, res) => {
             });
         }
 
-        const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-        if (recentOtp.length === 0) {
-            return res.status(400).json({
-                success: false,
-                message: "OTP not found",
-            });
-        } else if (otp !== recentOtp[0].otp) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid OTP",
-            });
-        }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
