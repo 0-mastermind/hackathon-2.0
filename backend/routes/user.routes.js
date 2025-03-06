@@ -3,7 +3,7 @@ import { connectWithUser, login, signUp, updateProfile, verifyUserDetails } from
 
 const userRouter = Router();
 
-userRouter.route("/signup").post(signUp);
+userRouter.route("/register").post(signUp);
 userRouter.route("/login").post(login);
 
 userRouter.route("/verify").get(verifyUserDetails);

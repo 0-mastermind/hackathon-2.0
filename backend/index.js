@@ -7,11 +7,21 @@ import postRouter from './routes/post.routes.js';
 import eventsRouter from './routes/events.routes.js';
 import opportunityRouter from './routes/opportunity.routes.js';
 import discussionsRouter from './routes/discussions.routes.js';
+import cors from "cors";
+
 
 configDotenv("./.env");
 
 const app = express();
 
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173",
+        ],
+        credentials: true,
+    })
+);
 
 app.use(express.static("public"));
 

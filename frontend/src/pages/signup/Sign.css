@@ -1,11 +1,3 @@
-/* Reset & Global Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
 /* Background Styling */
 .signup-page {
   height: 100vh;
@@ -101,5 +93,43 @@
   border-radius: 8px;
   font-size: 1rem;
   font-weight: bold;
-  cursor: poin
+  cursor: poin;
+}
+
+.signup-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.signup-button-container a {
+  margin-bottom: 6px;
+}
+
+/* Loading spinner */
+.fa-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Success message */
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
 }
