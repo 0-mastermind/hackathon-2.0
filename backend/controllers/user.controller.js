@@ -5,13 +5,13 @@ import { sendVerificationMail } from "../utils/sendEmail.js";
 
 
 const getRandomColor = () => {
-    const colors = ["red", "blue", "green", "purple", "orange"];
-    return colors[Math.floor(Math.random() * colors.length)];
+    return Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
 };
+
 
 export const signUp = async (req, res) => {
     try {
-        const { name, email, password, accountType, otp } = req.body;
+        const { name, email, password, accountType } = req.body;
 
         if (!name || !email || !password || !accountType) {
             return res.status(403).json({
@@ -33,7 +33,7 @@ export const signUp = async (req, res) => {
             email,
             password,
             accountType,
-            image: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=${getRandomColor()}`
+            image: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&chars=1&backgroundColor=${getRandomColor()}`
         });
         
         const verificationToken = await createdUser.generateVerificationToken();
@@ -46,7 +46,7 @@ export const signUp = async (req, res) => {
             success: true,
             message: "User registered successfully",
             userData: {
-                userID: createdUser._id.toString(),
+                createdUser,
                 success: true,
             },
         });

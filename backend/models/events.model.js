@@ -14,6 +14,11 @@ const eventSchema = new Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
+    category:
+    {
+      type : String,
+      enum : ["HACKATHON" , "DEBATE" , "WEBINAR" , "MEETUPS" , "WORKSHOPS"]
+    },
     image: {
       publicId: {
         type: String,
