@@ -7,7 +7,6 @@ const Home = () => {
     <>
       <nav className='navbar'>
         <div className='logo'>
-          
           <img src={logo} alt='EduTech Logo' className='logo-img' />
           <span>Pencil Connect</span>
         </div>
