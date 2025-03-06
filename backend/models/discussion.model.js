@@ -13,16 +13,30 @@ const discussionSchema = new Schema({
     type: mongoose.Types.ObjectId,
     ref: "User",
   },
-  imageUrl: {
-    type: String,
+  image: {
+    publicId: {
+      type: String,
+      required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
   },
-  likes: {
-    type: Number,
-  },
+  likes: [
+    {
+      count: {
+        type: Number,
+      },
+      userId: {
+        type: Schema.Types.ObjectId,
+      },
+    },
+  ],
   replies: [
     {
       content: {
-        type: Sting,
+        type: String,
       },
       userId: {
         type: mongoose.Types.ObjectId,
