@@ -21,11 +21,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-<<<<<<< HEAD
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/signup" element={<Sign />} />
-=======
->>>>>>> refs/remotes/origin/main
         <Route path="/login" element={<Login />} />
         <Route path="/role" element={<RoleSelection />} />
       </Routes>
