@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {User} from "../models/user.model.js";
+import { sendVerificationMail } from "../utils/sendEmail.js";
 
 
 const getRandomColor = () => {
@@ -27,21 +28,27 @@ export const signUp = async (req, res) => {
             });
         }
 
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const user = await User.create({
+        const createdUser = await User.create({
             name,
             email,
-            password: hashedPassword,
+            password,
             accountType,
             image: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=${getRandomColor()}`
         });
+        
+        const verificationToken = await createdUser.generateVerificationToken();
 
+        const userId = createdUser._id.toString();
+
+        sendVerificationMail(name, email, verificationToken, userId);
+        
         return res.status(200).json({
             success: true,
             message: "User registered successfully",
-            user,
+            userData: {
+                userID: createdUser._id.toString(),
+                success: true,
+            },
         });
 
     } catch (error) {
@@ -57,67 +64,62 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(403).json({
-                success: false,
-                message: "All fields are required, please try again",
-            });
-        }
-
         const user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(401).json({
+            return res.status(404).send({
+                message: "User don't exists",
                 success: false,
-                message: "User is not registered",
             });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(401).json({
+        if (!user.verifiedUser) {
+            const userId = user._id.toString();
+            const name = user.name.toString();
+
+            const verificationToken = await user.generateVerificationToken();
+
+            sendVerificationMail(name, user.email, verificationToken, userId);
+            return res.status(400).send({
+                message:
+                    "Email is not verified! We have sent you verification email please re-login after verification",
                 success: false,
-                message: "Password is incorrect",
             });
         }
 
-        const payload = {
-            email: user.email,
-            id: user._id,
-            accountType: user.accountType,
-        };
+        const isPasswordCorrect = await user.checkPassword(password);
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "2h" });
+        if (!isPasswordCorrect) {
+            return res.status(400).send({
+                message: "Incorrect password!!",
+                success: false,
+            });
+        }
 
-        user.token = token;
-        await user.save(); 
-
-        return res.status(200).json({
-            success: true,
-            message: "Logged in successfully",
-            user: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                accountType: user.accountType,
-                token: user.token,
+        return res.status(200).send({
+            message: "User Logged in successfully!!",
+            userData: {
+                userID: user._id.toString(),
+                success: true,
             },
         });
-
     } catch (error) {
         console.log(error);
-        return res.status(500).json({
+
+        return res.status(500).send({
+            message: "Error while login! Try to login with google",
+            error,
             success: false,
-            message: "Login failed, please try again",
         });
     }
 };
 
 export const updateProfile = async (req, res) => {
     try {
-        const { description, collegeName, skill } = req.body;
-        const id = req.user.id;
+        const { description, collegeName, skills } = req.body;
+        const id = req.params.userId;
 
-        if (!description || !collegeName || !skill) {
+        if (!description || !collegeName || !skills) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required",
@@ -134,7 +136,7 @@ export const updateProfile = async (req, res) => {
 
         userDetails.description = description;
         userDetails.collegeName = collegeName;
-        userDetails.skill = skill;
+        userDetails.skills = skills;
         await userDetails.save();
 
         return res.status(200).json({
@@ -149,6 +151,58 @@ export const updateProfile = async (req, res) => {
             success: false,
             message: "Profile update failed",
             error: error.message,
+        });
+    }
+};
+
+export const verifyUserDetails = async (req, res) => {
+    try {
+        const { id, token } = req.query;
+
+        if (!id || !token) {
+            return res.redirect(
+                `${process.env.FRONTEND_BASE_URL}/verificationFailed`
+            );
+        }
+
+        const verifiedToken = jwt.verify(token, process.env.SECRET_KEY);
+
+        if (!verifiedToken) {
+            return res.redirect(
+                `${process.env.FRONTEND_BASE_URL}/verificationFailed`
+            );
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    verifiedUser: true,
+                },
+            },
+            {
+                runValidators: true,
+            }
+        );
+
+        if (!updatedUser) {
+            return res.redirect(
+                `${process.env.FRONTEND_BASE_URL}/verificationFailed`
+            );
+        }
+
+        return res.redirect(`${process.env.FRONTEND_BASE_URL}/verified`);
+    } catch (error) {
+        if (error.message === "jwt expired") {
+            return res.redirect(
+                `${process.env.FRONTEND_BASE_URL}/tokenExpired`
+            );
+        }
+
+        console.log(error);
+
+        return res.status(500).send({
+            message: "Error! while verifying user",
         });
     }
 };
