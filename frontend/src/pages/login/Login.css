@@ -123,6 +123,16 @@
   transform: translateX(-5px);
 }
 
+.login-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.login-button-container a {
+  margin-bottom: 6px; 
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .login-container {
