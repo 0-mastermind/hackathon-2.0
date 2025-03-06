@@ -115,14 +115,6 @@ body {
     text-decoration: none;
 }
 
-.auth-btn:hover {
-    text-shadow: 0 0 3px #ffffff, 
-                 0 0 5px #ffffff;
-    box-shadow: 0 0 3px #008cff, 
-                0 0 8px #008cff,
-                0 0 15px #008cff;
-}
-
 /* Keep the icon styles */
 .btn-icon {
     width: 18px;
