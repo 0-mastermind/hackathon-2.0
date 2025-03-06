@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const postSchema = new Schema(
   {
@@ -20,9 +20,16 @@ const postSchema = new Schema(
         required: true,
       },
     },
-    likes: {
-      type: Number,
-    },
+    likes: [
+      {
+        count: {
+          type: Number,
+        },
+        userId: {
+          type: Schema.Types.ObjectId,
+        },
+      },
+    ],
     replies: [
       {
         content: {
