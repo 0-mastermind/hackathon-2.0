@@ -2,6 +2,11 @@ import { configDotenv } from 'dotenv';
 import connectDB from './connections/db.js';
 
 import express, { json } from "express";
+import userRouter from './routes/user.routes.js';
+import postRouter from './routes/post.routes.js';
+import eventsRouter from './routes/events.routes.js';
+import opportunityRouter from './routes/opportunity.routes.js';
+import discussionsRouter from './routes/discussions.routes.js';
 
 configDotenv("./.env");
 
@@ -16,6 +21,12 @@ app.use(
         extended: true,
     })
 );
+
+app.use("/api/users", userRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/events", eventsRouter);
+app.use("/api/jobs", opportunityRouter);
+app.use("/api/discussions", discussionsRouter);
 
 const PORT = process.env.PORT || 3030;
 
