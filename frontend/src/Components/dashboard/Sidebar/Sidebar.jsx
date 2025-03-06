@@ -6,44 +6,47 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <nav>
+        <div>
+        
+        </div>
         <ul className="nav-list">
           <li>
-            <NavLink to="/connect" className="nav-link">
+            <NavLink to="/dashboard/connect" className="nav-link">
               Connect
             </NavLink>
           </li>
           <li>
-            <NavLink to="/job" className="nav-link">
+            <NavLink to="/dashboard/job" className="nav-link">
               Job
             </NavLink>
           </li>
           <li>
-            <NavLink to="/events" className="nav-link">
+            <NavLink to="/dashboard/events" className="nav-link">
               Events
             </NavLink>
           </li>
           <li>
-            <NavLink to="/posts" className="nav-link">
+            <NavLink to="/dashboard/posts" className="nav-link">
               Posts
             </NavLink>
           </li>
           <li>
-            <NavLink to="/discussion" className="nav-link">
+            <NavLink to="/dashboard/discussion" className="nav-link">
               Discussion
             </NavLink>
           </li>
           <li>
-            <NavLink to="/post-job" className="nav-link">
+            <NavLink to="/dashboard/post-job" className="nav-link">
               Post Job
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my-profile" className="nav-link">
+            <NavLink to="/dashboard/my-profile" className="nav-link">
               My Profile
             </NavLink>
           </li>
           <li>
-            <NavLink to="/see-applications" className="nav-link">
+            <NavLink to="/dashboard/see-applications" className="nav-link">
               See Applications
             </NavLink>
           </li>
