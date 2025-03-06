@@ -5,16 +5,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  body {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-    padding: 20px;
-  }
-  
-  .container {
+ .container {
     text-align: center;
     max-width: 1200px;
     width: 100%;
