@@ -20,10 +20,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/role" element={<RoleSelection />} />
-        
+      </Routes>
+      <Routes>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="/dashboard/connect" element={<Connect />} />
           <Route path="/dashboard/job" element={<Jobs />} />
@@ -32,7 +32,10 @@ const App = () => {
           <Route path="/dashboard/discussion" element={<Discussion />} />
           <Route path="/dashboard/post-job" element={<PostJobs />} />
           <Route path="/dashboard/my-profile" element={<MyProfile />} />
-          <Route path="/dashboard/see-applications" element={<SeeApplications />} />
+          <Route
+            path="/dashboard/see-applications"
+            element={<SeeApplications />}
+          />
         </Route>
       </Routes>
     </Router>

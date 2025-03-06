@@ -4,7 +4,7 @@ import "./MyProfile.css"; // Import the CSS file
 const MyProfile = () => {
   const user = {
     name: "John Doe",
-    profile: "Alumni / Student",
+    profile: "Alumni",
     college: "Harvard University",
     description:
       "Passionate about web development and design. Currently pursuing a degree in Computer Science.",
