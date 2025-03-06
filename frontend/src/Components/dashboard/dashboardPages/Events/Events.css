@@ -1,0 +1,138 @@
+/* Events.css */
+.events-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .events-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 40px;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    position: relative;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    border: 2px solid #e2e8f0;
+    background-color: #f9f9f9;
+    color: #000;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    outline: none;
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 15px;
+    color: #64748b;
+    font-size: 1.2rem;
+    pointer-events: none;
+  }
+  
+  /* Event List */
+  .events-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .event-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .event-title {
+    font-size: 1.5rem;
+    color: #1e293b;
+    padding: 15px;
+    text-align: center;
+    background: #f0f7ff;
+    margin: 0;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: 200px; /* Fixed height for the image div */
+    background-size: cover; /* Ensure the image covers the div */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+  }
+  
+  .event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .event-category {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 600;
+  }
+  
+  .event-date {
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+  
+  .register-btn {
+    width: 100%;
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .register-btn:hover {
+    background: #1d4ed8;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .events-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .event-card {
+      width: 100%;
+      max-width: 400px;
+    }
+  }

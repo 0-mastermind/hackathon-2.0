@@ -14,6 +14,8 @@ import SeeApplications from "./Components/dashboard/dashboardPages/SeeApplicatio
 import RoleSelection from "./pages/roleSelection/Role";
 import Sign from "./pages/signup/Sign";
 import Login from "./pages/login/Login";
+import CreatePost from "./Components/dashboard/dashboardPages/createPost/CreatePost";
+import CreateEvent from "./Components/dashboard/dashboardPages/createEvent/CreateEvent";
 
 const App = () => {
   return (
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="/dashboard/discussion" element={<Discussion />} />
           <Route path="/dashboard/post-job" element={<PostJobs />} />
           <Route path="/dashboard/my-profile" element={<MyProfile />} />
+          <Route path="/dashboard/create-post" element={<CreatePost />} />
+          <Route path="/dashboard/create-event" element={<CreateEvent />} />
           <Route
             path="/dashboard/see-applications"
             element={<SeeApplications />}
