@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Post } from "../models/post.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.config.js";
 
@@ -5,7 +6,7 @@ const createPost = async (req, res) => {
   try {
     const { title } = req.body;
     const { postImage } = req.files;
-    const userId = req.query;
+    const userId = req.params.userId;
         
     if (!title && !postImage) {
       return res.status(400).json({
@@ -14,7 +15,7 @@ const createPost = async (req, res) => {
       });
     }
     
-    const uploadedImage = await uploadOnCloudinary(postImage[0]?.path, "posts");
+    const uploadedImage = await uploadOnCloudinary(postImage[0]?.path, "posts");    
     
     const createdPost = await Post.create({
       title, 

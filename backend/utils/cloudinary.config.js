@@ -1,4 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
+import { configDotenv } from "dotenv";
+
+configDotenv("./.env");
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,14 +14,13 @@ const uploadOnCloudinary = async (localFilePath, folderName) => {
     try {
         if (!localFilePath) {
             return null;
-        }
+        }        
 
         // Upload the file on cloudinary
         const response = await cloudinary.uploader.upload(localFilePath, {
             resource_type: "auto",
             folder: folderName
-        });
-        
+        });        
         return response;
     } catch (error) {
         return null;

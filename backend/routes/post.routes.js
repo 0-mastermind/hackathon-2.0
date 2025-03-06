@@ -6,7 +6,7 @@ const postRouter = Router();
 
 const fileUploads = multerUpload.fields([
   {
-      name: "PostImage",
+      name: "postImage",
       maxCount: 1,
   },
 ]);

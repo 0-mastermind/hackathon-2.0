@@ -7,7 +7,7 @@ const postSchema = new Schema(
       required: true,
     },
     userId: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
     image: {
@@ -29,7 +29,7 @@ const postSchema = new Schema(
           type: String,
         },
         userId: {
-          type: mongoose.Types.ObjectId,
+          type: Schema.Types.ObjectId,
           ref: "User",
         },
       },
