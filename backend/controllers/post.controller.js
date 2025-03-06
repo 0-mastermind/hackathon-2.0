@@ -27,7 +27,7 @@ const createPost = async (req, res) => {
     
     return res.status(200).json({
       success: true,
-      message: "User Created Successfully!",
+      message: "Post Created Successfully!",
       createdPost,
     })
   } catch (error) {

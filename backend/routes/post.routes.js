@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPost } from "../controllers/model.controller.js";
+import { createPost } from "../controllers/post.controller.js";
 import { multerUpload } from "../middlewares/multer.middleware.js";
 
 const postRouter = Router();
