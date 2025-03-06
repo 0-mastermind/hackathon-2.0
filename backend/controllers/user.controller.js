@@ -162,7 +162,7 @@ export const verifyUserDetails = async (req, res) => {
         if (!id || !token) {
             return res.redirect(
                 `${process.env.FRONTEND_BASE_URL}/verificationFailed`
-            );
+            );verificationFailed
         }
 
         const verifiedToken = jwt.verify(token, process.env.SECRET_KEY);
@@ -203,6 +203,66 @@ export const verifyUserDetails = async (req, res) => {
 
         return res.status(500).send({
             message: "Error! while verifying user",
+        });
+    }
+};
+
+
+export const connectWithUser = async (req, res) => {
+    try {
+        const { userId } = req.params; 
+        const { targetUserId } = req.query; 
+
+        if (userId === targetUserId) {
+            return res.status(400).json({
+                success: false,
+                message: "You cannot connect with yourself",
+            });
+        }
+
+        
+        const sender = await User.findById(userId);
+        const receiver = await User.findById(targetUserId);
+
+        if (!sender || !receiver) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        
+        const isConnected = sender.connectedUser.includes(targetUserId);
+
+        if (isConnected) {
+            sender.connectedUser = sender.connectedUser.filter(id => id.toString() !== targetUserId);
+            await sender.save();
+            await receiver.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Disconnected successfully",
+                senderConnections: sender.connectedUser,
+            });
+        } else {
+            
+            sender.connectedUser.push(targetUserId);
+            await sender.save();
+            await receiver.save();
+
+            return res.status(200).json({
+                success: true,
+                message: "Connected successfully",
+                senderConnections: sender.connectedUser,
+            });
+        }
+
+    } catch (error) {
+        console.error("Error toggling connection:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to process connection request",
+            error: error.message,
         });
     }
 };

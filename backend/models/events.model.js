@@ -14,14 +14,21 @@ const eventSchema = new Schema(
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
-    imageUrl: {
-      type: String,
+    image: {
+      publicId: {
+        type: String,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
     link: {
       type: String,
     },
     eventData: {
-      type: Date,
+      type: String,
     },
     appliedUsers: [
       {

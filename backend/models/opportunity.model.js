@@ -16,6 +16,7 @@ const opportunitySchema = new Schema({
   link: {
     type: String,
   },
+  
   titleType: {
     type: String,
     enum: ["INTERNSHIP", "JOB"] 
