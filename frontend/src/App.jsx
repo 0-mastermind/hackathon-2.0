@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import About from "./pages/about/About";
-import Login from "./pages/login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Connect from "./Components/dashboard/dashboardPages/Connect/Connect";
 import Jobs from "./Components/dashboard/dashboardPages/Jobs/Jobs";
@@ -13,6 +12,8 @@ import PostJobs from "./Components/dashboard/dashboardPages/postJobs/PostJobs";
 import MyProfile from "./Components/dashboard/dashboardPages/MyProfile/MyProfile";
 import SeeApplications from "./Components/dashboard/dashboardPages/SeeApplications/SeeApplications";
 import RoleSelection from "./pages/roleSelection/Role";
+import Sign from "./pages/signup/Sign";
+import Login from "./pages/login/Login";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/signup" element={<Sign />} />
         <Route path="/login" element={<Login />} />
         <Route path="/role" element={<RoleSelection />} />
         
