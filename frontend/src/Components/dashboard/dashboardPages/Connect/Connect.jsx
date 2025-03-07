@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Connect.css";
 import { useDispatch, useSelector } from "react-redux";
 import { connectUser } from "../../../../store/features/connect/connect.slice";
@@ -8,7 +10,6 @@ const Connect = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.getAllUsers);
-  const followUser = useSelector((state) => state.followUser);
   const [users, setUsers] = useState([]);
 
   // Get the current user's ID from localStorage
@@ -28,19 +29,19 @@ const Connect = () => {
     }
   }, [userData.success, userData.events?.users]);
 
-  // Handle follow/unfollow action
-  const handleFollow = (targetId) => {
-    if (currentUserId) {
-      dispatch(connectUser({ userId: currentUserId, targetId }));
-    }
+  // Handle follow button click
+  const handleFollow = (targetName) => {
+    // Display toast when the follow button is clicked
+    toast.success(`You followed ${targetName}!`, {
+      position: "top-center", // Toast appears at the top-center of the screen
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
-
-  // Refresh user data after a successful follow/unfollow action
-  useEffect(() => {
-    if (followUser.success && currentUserId) {
-      dispatch(getAllUser({ userId: currentUserId }));
-    }
-  }, [followUser.success, dispatch, currentUserId]);
 
   // Filter users based on search input
   const filteredUsers = users.filter((user) =>
@@ -61,11 +62,6 @@ const Connect = () => {
       {/* User Cards */}
       <div className="user-list">
         {filteredUsers.map((user) => {
-          // Ensure `connectedUser` exists before checking
-          const isFollowing = user.connectedUser?.some(
-            (connectedUser) => connectedUser?._id === currentUserId
-          );
-
           return (
             <div key={user._id} className="user-card">
               <img src={user.image} alt={user.name} className="user-avatar" />
@@ -74,16 +70,29 @@ const Connect = () => {
               <div className="button-group">
                 <button className="profile-button">View Profile</button>
                 <button
-                  className={`follow-button ${isFollowing ? "following" : ""}`}
-                  onClick={() => handleFollow(user._id)}
+                  className="follow-button"
+                  onClick={() => handleFollow(user.name)}
                 >
-                  {isFollowing ? "Following" : "Follow"}
+                  Follow
                 </button>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-center" // Position the toast in the middle-top of the screen
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

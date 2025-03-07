@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./CreatePost.css"; // Import the CSS file
 
 const CreatePost = () => {
@@ -33,7 +35,24 @@ const CreatePost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    // Add your form submission logic here (e.g., API call)
+
+    // Display success toast
+    toast.success("Post created successfully!", {
+      position: "top-center", // Toast appears at the top-center of the screen
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    // Reset form fields after submission
+    setFormData({
+      title: "",
+      description: "",
+      image: null,
+    });
   };
 
   return (
@@ -88,6 +107,19 @@ const CreatePost = () => {
           Create Post
         </button>
       </form>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-center" // Position the toast in the middle-top of the screen
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

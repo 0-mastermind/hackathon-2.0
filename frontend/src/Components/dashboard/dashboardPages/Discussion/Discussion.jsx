@@ -29,9 +29,30 @@ const DiscussionForum = () => {
   // State to manage which discussion's reply dropdown is open
   const [openReplyId, setOpenReplyId] = useState(null);
 
+  // State to store replies for each discussion
+  const [replies, setReplies] = useState({});
+
+  // State to store the current reply text
+  const [replyText, setReplyText] = useState("");
+
   // Toggle reply dropdown
   const toggleReplyDropdown = (id) => {
     setOpenReplyId(openReplyId === id ? null : id);
+    setReplyText(""); // Clear the reply text when toggling
+  };
+
+  // Handle reply submission
+  const handleReplySubmit = (id) => {
+    if (replyText.trim() === "") return; // Do not submit empty replies
+
+    // Update the replies state with the new reply
+    setReplies((prevReplies) => ({
+      ...prevReplies,
+      [id]: [...(prevReplies[id] || []), replyText], // Add the new reply to the discussion
+    }));
+
+    setReplyText(""); // Clear the reply text after submission
+    setOpenReplyId(null); // Close the reply dropdown
   };
 
   return (
@@ -47,6 +68,18 @@ const DiscussionForum = () => {
 
             {/* Description */}
             <p className="discussion-description">{discussion.description}</p>
+
+            {/* Display Replies */}
+            {replies[discussion.id] && (
+              <div className="replies-section">
+                <h4>Replies:</h4>
+                {replies[discussion.id].map((reply, index) => (
+                  <div key={index} className="reply-item">
+                    <p>{reply}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Reply Icon and Dropdown */}
             <div className="reply-section">
@@ -65,8 +98,15 @@ const DiscussionForum = () => {
                     placeholder="Write your reply..."
                     rows="3"
                     className="reply-textarea"
+                    value={replyText}
+                    onChange={(e) => setReplyText(e.target.value)}
                   ></textarea>
-                  <button className="submit-reply-button">Submit</button>
+                  <button
+                    className="submit-reply-button"
+                    onClick={() => handleReplySubmit(discussion.id)}
+                  >
+                    Submit
+                  </button>
                 </div>
               )}
             </div>

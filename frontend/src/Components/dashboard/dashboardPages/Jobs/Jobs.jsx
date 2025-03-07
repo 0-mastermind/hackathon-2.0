@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./Job.css"; // Import the CSS file
 
 const Job = () => {
@@ -46,6 +48,19 @@ const Job = () => {
     job.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // Handle Apply Button Click
+  const handleApply = (jobTitle) => {
+    toast.success(`Applied for ${jobTitle}!`, {
+      position: "top-center", // Toast appears at the top-center of the screen
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="job-container">
       <h1 className="job-heading">Job Postings</h1>
@@ -73,10 +88,28 @@ const Job = () => {
               <p className="job-location">{job.location}</p>
               <p className="job-salary">{job.salary}</p>
             </div>
-            <button className="apply-btn">Apply</button>
+            <button
+              className="apply-btn"
+              onClick={() => handleApply(job.title)}
+            >
+              Apply
+            </button>
           </div>
         ))}
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-center" // Position the toast in the middle-top of the screen
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
