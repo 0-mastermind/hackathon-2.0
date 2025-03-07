@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./Connect.css";
+import { useDispatch, useSelector } from "react-redux";
+import { connectUser } from "../../../../store/features/connect/connect.slice";
 
 const Connect = () => {
   const [search, setSearch] = useState("");
-
+  const dispatch = useDispatch();
+  // const connectData = () => {}
   // Sample user data
   const users = [
     {
@@ -31,6 +34,11 @@ const Connect = () => {
     user.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleFollow = () => {
+    const userId = JSON.parse(localStorage("AUTH_DATA")).userID;
+    dispatch(connectUser({userId, }));
+  };
+
   return (
     <div className="connect-container">
       {/* Search Input */}
@@ -48,12 +56,12 @@ const Connect = () => {
           <div key={user.id} className="user-card">
             <img src={user.avatar} alt={user.name} className="user-avatar" />
             <h3 className="user-name">{user.name}</h3>
-            <p className="user-skills">
-              {user.skills.join(" • ")}
-            </p>
+            <p className="user-skills">{user.skills.join(" • ")}</p>
             <div className="button-group">
               <button className="profile-button">View Profile</button>
-              <button className="follow-button">Follow</button>
+              <button className="follow-button" onClick={() => handleFollow()}>
+                Follow
+              </button>
             </div>
           </div>
         ))}
