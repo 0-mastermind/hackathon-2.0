@@ -28,7 +28,7 @@ const Sidebar = () => {
               to="/dashboard/connect"
               className="nav-link"
               title="Connect"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faUserFriends} className="icon" />
               <span className="nav-text">Connect</span>
@@ -39,7 +39,7 @@ const Sidebar = () => {
               to="/dashboard/job"
               className="nav-link"
               title="Job"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faBriefcase} className="icon" />
               <span className="nav-text">Job</span>
@@ -50,7 +50,7 @@ const Sidebar = () => {
               to="/dashboard/events"
               className="nav-link"
               title="Events"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
               <span className="nav-text">Events</span>
@@ -61,7 +61,7 @@ const Sidebar = () => {
               to="/dashboard/posts"
               className="nav-link"
               title="Posts"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faNewspaper} className="icon" />
               <span className="nav-text">Posts</span>
@@ -72,7 +72,7 @@ const Sidebar = () => {
               to="/dashboard/discussion"
               className="nav-link"
               title="Discussion"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faComments} className="icon" />
               <span className="nav-text">Discussion</span>
@@ -83,7 +83,7 @@ const Sidebar = () => {
               to="/dashboard/post-job"
               className="nav-link"
               title="Post Job"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faPlusCircle} className="icon" />
               <span className="nav-text">Post Job</span>
@@ -94,7 +94,7 @@ const Sidebar = () => {
               to="/dashboard/my-profile"
               className="nav-link"
               title="My Profile"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faUserCircle} className="icon" />
               <span className="nav-text">My Profile</span>
@@ -105,7 +105,7 @@ const Sidebar = () => {
               to="/dashboard/see-applications"
               className="nav-link"
               title="See Applications"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faClipboardList} className="icon" />
               <span className="nav-text">See Applications</span>
@@ -116,7 +116,7 @@ const Sidebar = () => {
               to="/dashboard/create-post"
               className="nav-link"
               title="Create Post"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faEdit} className="icon" />
               <span className="nav-text">Create Post</span>
@@ -127,7 +127,7 @@ const Sidebar = () => {
               to="/dashboard/create-event"
               className="nav-link"
               title="Create Event"
-              activeClassName="active"
+              activeclassname="active"
             >
               <FontAwesomeIcon icon={faCalendarPlus} className="icon" />
               <span className="nav-text">Create Event</span>

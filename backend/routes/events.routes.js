@@ -17,7 +17,7 @@ eventsRouter.route("/:userId/create").post(fileUploads, createEvent);
 eventsRouter.route("/:userId/apply").post(fileUploads, applyEvent); 
 eventsRouter.route("/search").post(fileUploads, searchEvents); 
 eventsRouter.route("/:eventId/delete").post(fileUploads, deleteEvent); 
-userRouter.route("/getAll").get(getAllEvents);
+eventsRouter.route("/getAll").get(getAllEvents);
 
 
 

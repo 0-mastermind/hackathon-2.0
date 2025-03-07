@@ -4,7 +4,7 @@ import api from "../../../utils/axios.utils";
 // Async thunk for creating a user account
 export const connectUser = createAsyncThunk(
   "user/follow",
-  async ({userData, targetId}, { rejectWithValue }) => {
+  async ({userId, targetId}, { rejectWithValue }) => {
     try {
       const response = await api.post(`/users/${userId}/register?targetUserId=${targetId}`, userData);
       return response; // Return response data on success
@@ -27,7 +27,7 @@ const initialState = {
 };
 
 // Signup slice
-const signupSlice = createSlice({
+const connectToUser = createSlice({
   name: "signup",
   initialState,
   reducers: {
@@ -63,5 +63,5 @@ const signupSlice = createSlice({
 });
 
 // Export actions and reducer
-export const { setUserDetails, setType } = signupSlice.actions;
-export default signupSlice.reducer;
+export const { setUserDetails, setType } = connectToUser.actions;
+export default connectToUser.reducer;

@@ -1,43 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Connect.css";
 import { useDispatch, useSelector } from "react-redux";
 import { connectUser } from "../../../../store/features/connect/connect.slice";
+import { getAllUser } from "../../../../store/features/user/getAll.slice";
 
 const Connect = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
-  // const connectData = () => {}
-  // Sample user data
-  const users = [
-    {
-      id: 1,
-      name: "John Doe",
-      avatar: "https://via.placeholder.com/80",
-      skills: ["React", "JavaScript", "CSS"],
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      avatar: "https://via.placeholder.com/80",
-      skills: ["Node.js", "MongoDB", "Express"],
-    },
-    {
-      id: 3,
-      name: "Alice Johnson",
-      avatar: "https://via.placeholder.com/80",
-      skills: ["Python", "Django", "Machine Learning"],
-    },
-  ];
+  const userData = useSelector((state) => state.getAllUsers);
+  const [users, setUsers] = useState([]);
+
+  // Get the current user's ID from localStorage
+  const currentUserId = JSON.parse(localStorage.getItem("AUTH_DATA"))?.userID;
+
+  // Fetch all users on component mount
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch]);
+
+  // Update the users state when userData is successfully fetched
+  useEffect(() => {
+    if (userData.success) {
+      setUsers(userData.events.users);
+    }
+  }, [userData.success, userData.events.users]);
+
+  // Handle follow/unfollow action
+  const handleFollow = (targetId) => {
+    if (currentUserId) {
+      dispatch(connectUser({ userId: currentUserId, targetId }));
+    }
+  };
 
   // Filter users based on search input
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(search.toLowerCase())
   );
-
-  const handleFollow = () => {
-    const userId = JSON.parse(localStorage("AUTH_DATA")).userID;
-    dispatch(connectUser({userId, }));
-  };
 
   return (
     <div className="connect-container">
@@ -52,19 +50,27 @@ const Connect = () => {
 
       {/* User Cards */}
       <div className="user-list">
-        {filteredUsers.map((user) => (
-          <div key={user.id} className="user-card">
-            <img src={user.avatar} alt={user.name} className="user-avatar" />
-            <h3 className="user-name">{user.name}</h3>
-            <p className="user-skills">{user.skills.join(" • ")}</p>
-            <div className="button-group">
-              <button className="profile-button">View Profile</button>
-              <button className="follow-button" onClick={() => handleFollow()}>
-                Follow
-              </button>
+        {filteredUsers.map((user) => {
+          // Check if the current user is in the target user's connectedUser array
+          const isFollowing = user.connectedUser.includes(currentUserId);
+
+          return (
+            <div key={user._id} className="user-card">
+              <img src={user.image} alt={user.name} className="user-avatar" />
+              <h3 className="user-name">{user.name}</h3>
+              <p className="user-skills">{user.skills.join(" • ")}</p>
+              <div className="button-group">
+                <button className="profile-button">View Profile</button>
+                <button
+                  className={`follow-button ${isFollowing ? "following" : ""}`}
+                  onClick={() => handleFollow(user._id)}
+                >
+                  {isFollowing ? "Following" : "Follow"}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
