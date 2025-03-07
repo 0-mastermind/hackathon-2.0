@@ -266,3 +266,22 @@ export const connectWithUser = async (req, res) => {
         });
     }
 };
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().select("-password");
+
+        return res.status(200).json({
+            success: true,
+            message: "Users fetched successfully",
+            users,
+        });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch users",
+            error: error.message,
+        });
+    }
+};

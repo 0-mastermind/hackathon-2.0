@@ -21,6 +21,7 @@
   border-radius: 4px;
   margin-bottom: 5px;
   transition: background-color 0.3s, color 0.3s;
+  position: relative;
 }
 
 .nav-link:hover {
@@ -29,13 +30,19 @@
 
 .nav-link.active {
   background-color: #007bff;
-  color: #fff;
+  color: white;
+}
+
+.nav-link.active .icon {
+  color: white; /* Change icon color when active */
 }
 
 .icon {
-  margin-right: 10px; /* Add spacing between icon and text */
-  width: 16px; /* Set a fixed width for icons */
-  text-align: center; /* Center the icon */
+  margin-right: 10px;
+  width: 16px;
+  text-align: center;
+  color: #2563eb; /* Default icon color */
+  transition: color 0.3s ease;
 }
 
 .nav-text {
@@ -46,7 +53,7 @@
 .nav-link::after {
   content: attr(title);
   position: absolute;
-  left: 50px; /* Adjust based on icon size */
+  left: 50px;
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.8);

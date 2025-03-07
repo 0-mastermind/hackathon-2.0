@@ -10,8 +10,8 @@ import {
   faPlusCircle,
   faUserCircle,
   faClipboardList,
-  faEdit, // Icon for Create Post
-  faCalendarPlus, // Icon for Create Event
+  faEdit,
+  faCalendarPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import './sidebar.css'; // Import the CSS file
 
@@ -24,62 +24,111 @@ const Sidebar = () => {
         </div>
         <ul className="nav-list">
           <li>
-            <NavLink to="/dashboard/connect" className="nav-link" title="Connect">
+            <NavLink
+              to="/dashboard/connect"
+              className="nav-link"
+              title="Connect"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faUserFriends} className="icon" />
               <span className="nav-text">Connect</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/job" className="nav-link" title="Job">
+            <NavLink
+              to="/dashboard/job"
+              className="nav-link"
+              title="Job"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faBriefcase} className="icon" />
               <span className="nav-text">Job</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/events" className="nav-link" title="Events">
+            <NavLink
+              to="/dashboard/events"
+              className="nav-link"
+              title="Events"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faCalendarAlt} className="icon" />
               <span className="nav-text">Events</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/posts" className="nav-link" title="Posts">
+            <NavLink
+              to="/dashboard/posts"
+              className="nav-link"
+              title="Posts"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faNewspaper} className="icon" />
               <span className="nav-text">Posts</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/discussion" className="nav-link" title="Discussion">
+            <NavLink
+              to="/dashboard/discussion"
+              className="nav-link"
+              title="Discussion"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faComments} className="icon" />
               <span className="nav-text">Discussion</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/post-job" className="nav-link" title="Post Job">
+            <NavLink
+              to="/dashboard/post-job"
+              className="nav-link"
+              title="Post Job"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faPlusCircle} className="icon" />
               <span className="nav-text">Post Job</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/my-profile" className="nav-link" title="My Profile">
+            <NavLink
+              to="/dashboard/my-profile"
+              className="nav-link"
+              title="My Profile"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faUserCircle} className="icon" />
               <span className="nav-text">My Profile</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/see-applications" className="nav-link" title="See Applications">
+            <NavLink
+              to="/dashboard/see-applications"
+              className="nav-link"
+              title="See Applications"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faClipboardList} className="icon" />
               <span className="nav-text">See Applications</span>
             </NavLink>
           </li>
-          {/* New Items */}
           <li>
-            <NavLink to="/dashboard/create-post" className="nav-link" title="Create Post">
+            <NavLink
+              to="/dashboard/create-post"
+              className="nav-link"
+              title="Create Post"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faEdit} className="icon" />
               <span className="nav-text">Create Post</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/create-event" className="nav-link" title="Create Event">
+            <NavLink
+              to="/dashboard/create-event"
+              className="nav-link"
+              title="Create Event"
+              activeClassName="active"
+            >
               <FontAwesomeIcon icon={faCalendarPlus} className="icon" />
               <span className="nav-text">Create Event</span>
             </NavLink>
