@@ -124,3 +124,33 @@
       font-size: 2rem;
     }
   }
+
+
+  /* Replies Section */
+.replies-section {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .replies-section h4 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 10px;
+  }
+  
+  .reply-item {
+    padding: 8px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .reply-item p {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin: 0;
+  }

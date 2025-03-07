@@ -89,7 +89,7 @@ const Sidebar = () => {
               <span className="nav-text">Post Job</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink
               to="/dashboard/my-profile"
               className="nav-link"
@@ -99,8 +99,8 @@ const Sidebar = () => {
               <FontAwesomeIcon icon={faUserCircle} className="icon" />
               <span className="nav-text">My Profile</span>
             </NavLink>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <NavLink
               to="/dashboard/see-applications"
               className="nav-link"
@@ -110,7 +110,7 @@ const Sidebar = () => {
               <FontAwesomeIcon icon={faClipboardList} className="icon" />
               <span className="nav-text">See Applications</span>
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/dashboard/create-post"

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./PostJob.css"; // Import the CSS file
 
 const PostJob = () => {
@@ -25,7 +27,27 @@ const PostJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    // Add your form submission logic here (e.g., API call)
+
+    // Display success toast
+    toast.success("Job posted successfully!", {
+      position: "top-center", // Toast appears at the top-center of the screen
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    // Reset form fields after submission
+    setFormData({
+      title: "",
+      description: "",
+      jobType: "Internship",
+      skillsRequired: "",
+      companyName: "",
+      qualificationRequired: "",
+    });
   };
 
   return (
@@ -124,6 +146,19 @@ const PostJob = () => {
           Post Job
         </button>
       </form>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-center" // Position the toast in the middle-top of the screen
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

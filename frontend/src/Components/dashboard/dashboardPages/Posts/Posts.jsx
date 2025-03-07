@@ -1,42 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faReply } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 import "./Post.css"; // Import the CSS file
+import img1 from './img1.jpg';
+import img2 from './img2.jpg';
+import img3 from './img3.jpg';
 
 const Post = () => {
   // Sample post data
-  const postsData = [
+  const [postsData, setPostsData] = useState([
     {
       id: 1,
       title: "Beautiful Sunset",
       description: "A breathtaking view of the sunset over the horizon.",
-      image: "https://via.placeholder.com/400x200",
+      image: img1,
       likes: 120,
-      replies: 45,
-      profilePic: "https://via.placeholder.com/40",
       name: "John Doe",
     },
     {
       id: 2,
       title: "Mountain Adventure",
       description: "Exploring the majestic mountains and their beauty.",
-      image: "https://via.placeholder.com/400x200",
+      image: img2,
       likes: 95,
-      replies: 30,
-      profilePic: "https://via.placeholder.com/40",
       name: "Jane Smith",
     },
     {
       id: 3,
       title: "City Lights",
       description: "The vibrant nightlife of the city never disappoints.",
-      image: "https://via.placeholder.com/400x200",
+      image: img3,
       likes: 150,
-      replies: 60,
-      profilePic: "https://via.placeholder.com/40",
       name: "Alice Johnson",
     },
-  ];
+  ]);
+
+  // Handle like button click
+  const handleLike = (id) => {
+    setPostsData((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === id ? { ...post, likes: post.likes + 1 } : post
+      )
+    );
+  };
+
+  // Handle dislike button click
+  const handleDislike = (id) => {
+    setPostsData((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === id ? { ...post, likes: Math.max(post.likes - 1, 0) } : post
+      )
+    );
+  };
 
   return (
     <div className="post-container">
@@ -46,13 +61,8 @@ const Post = () => {
       <div className="post-list">
         {postsData.map((post) => (
           <div key={post.id} className="post-card">
-            {/* Profile Section */}
+            {/* Name */}
             <div className="profile-section">
-              <img
-                src={post.profilePic}
-                alt={post.name}
-                className="profile-pic"
-              />
               <span className="profile-name">{post.name}</span>
             </div>
 
@@ -68,15 +78,14 @@ const Post = () => {
               style={{ backgroundImage: `url(${post.image})` }}
             ></div>
 
-            {/* Like and Reply Icons */}
+            {/* Like and Dislike Buttons */}
             <div className="post-actions">
-              <div className="like-action">
+              <div className="like-action" onClick={() => handleLike(post.id)}>
                 <FontAwesomeIcon icon={faHeart} className="like-icon" />
                 <span className="like-count">{post.likes}</span>
               </div>
-              <div className="reply-action">
-                <FontAwesomeIcon icon={faReply} className="reply-icon" />
-                <span className="reply-count">{post.replies}</span>
+              <div className="dislike-action" onClick={() => handleDislike(post.id)}>
+                <FontAwesomeIcon icon={faThumbsDown} className="dislike-icon" />
               </div>
             </div>
           </div>

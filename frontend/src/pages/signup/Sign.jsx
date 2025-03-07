@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createUserAccount, setUserDetails } from "../../store/features/auth/signup.slice";
 import "./Sign.css";
 
@@ -8,13 +10,15 @@ const Sign = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const signupData = useSelector((state) => state.signup);
-  
+
+  // Redirect to role selection page if accountType is not set
   useEffect(() => {
     if (!signupData.accountType) {
       navigate("/role");
     }
-  }, [])
+  }, [signupData.accountType, navigate]);
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -25,15 +29,30 @@ const Sign = () => {
     dispatch(createUserAccount({ name, email, password, confirmPassword, accountType }));
   };
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     dispatch(setUserDetails({ name, value }));
   };
 
-  // Redirect to login page after successful signup
-  React.useEffect(() => {
+  // Redirect to login page after successful signup with a 2-second delay
+  useEffect(() => {
     if (signupData.success) {
-      navigate("/login");
+      // Display success toast
+      toast.success("Verification email sent! Redirecting to login...", {
+        position: "top-center", // Toast appears at the top-center of the screen
+        autoClose: 2000, // Close the toast after 2 seconds
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      // Navigate to login page after 2 seconds
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     }
   }, [signupData.success, navigate]);
 
@@ -52,7 +71,6 @@ const Sign = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            {/* <i className="fas fa-user"></i> */}
             <input
               type="text"
               name="name"
@@ -65,7 +83,6 @@ const Sign = () => {
           </div>
 
           <div className="form-group">
-            {/* <i className="fas fa-envelope"></i> */}
             <input
               type="email"
               name="email"
@@ -78,7 +95,6 @@ const Sign = () => {
           </div>
 
           <div className="form-group">
-            {/* <i className="fas fa-lock"></i> */}
             <input
               type="password"
               name="password"
@@ -91,7 +107,6 @@ const Sign = () => {
           </div>
 
           <div className="form-group">
-            {/* <i className="fas fa-lock"></i> */}
             <input
               type="password"
               name="confirmPassword"
@@ -123,6 +138,19 @@ const Sign = () => {
           </div>
         </form>
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer
+        position="top-center" // Position the toast in the middle-top of the screen
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };
