@@ -46,7 +46,6 @@ export const createEvent = async (req, res) => {
     }
 };
 
-
 export const applyEvent = async (req, res) => {
     try {
         const { eventId } = req.query; 
@@ -152,6 +151,25 @@ export const searchEvents = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Failed to search for events.",
+            error: error.message,
+        });
+    }
+};
+
+export const getAllEvents = async (req, res) => {
+    try {
+        const events = await Event.find();
+
+        return res.status(200).json({
+            success: true,
+            message: "Users fetched successfully",
+            events,
+        });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Failed to fetch users",
             error: error.message,
         });
     }
