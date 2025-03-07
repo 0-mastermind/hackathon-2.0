@@ -9,6 +9,6 @@ userRouter.route("/login").post(login);
 userRouter.route("/verify").get(verifyUserDetails);
 userRouter.route("/:userId/update").post(updateProfile);
 userRouter.route("/:userId/connect").post(connectWithUser);
-userRouter.route("/getAll").get(getAllUsers);
+userRouter.route("/:userId/getAll").get(getAllUsers);
 
 export default userRouter;

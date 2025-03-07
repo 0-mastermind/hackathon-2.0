@@ -8,6 +8,7 @@ const Connect = () => {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.getAllUsers);
+  const followUser = useSelector((state) => state.followUser);
   const [users, setUsers] = useState([]);
 
   // Get the current user's ID from localStorage
@@ -15,15 +16,17 @@ const Connect = () => {
 
   // Fetch all users on component mount
   useEffect(() => {
-    dispatch(getAllUser());
-  }, [dispatch]);
+    if (currentUserId) {
+      dispatch(getAllUser({ userId: currentUserId }));
+    }
+  }, [dispatch, currentUserId]);
 
   // Update the users state when userData is successfully fetched
   useEffect(() => {
-    if (userData.success) {
+    if (userData.success && userData.events?.users) {
       setUsers(userData.events.users);
     }
-  }, [userData.success, userData.events.users]);
+  }, [userData.success, userData.events?.users]);
 
   // Handle follow/unfollow action
   const handleFollow = (targetId) => {
@@ -31,6 +34,13 @@ const Connect = () => {
       dispatch(connectUser({ userId: currentUserId, targetId }));
     }
   };
+
+  // Refresh user data after a successful follow/unfollow action
+  useEffect(() => {
+    if (followUser.success && currentUserId) {
+      dispatch(getAllUser({ userId: currentUserId }));
+    }
+  }, [followUser.success, dispatch, currentUserId]);
 
   // Filter users based on search input
   const filteredUsers = users.filter((user) =>
@@ -51,8 +61,10 @@ const Connect = () => {
       {/* User Cards */}
       <div className="user-list">
         {filteredUsers.map((user) => {
-          // Check if the current user is in the target user's connectedUser array
-          const isFollowing = user.connectedUser.includes(currentUserId);
+          // Ensure `connectedUser` exists before checking
+          const isFollowing = user.connectedUser?.some(
+            (connectedUser) => connectedUser?._id === currentUserId
+          );
 
           return (
             <div key={user._id} className="user-card">

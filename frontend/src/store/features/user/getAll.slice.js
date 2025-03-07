@@ -4,9 +4,9 @@ import api from "../../../utils/axios.utils";
 // Async thunk for fetching all events
 export const getAllUser = createAsyncThunk(
   "events/getAllUser",
-  async (_, { rejectWithValue }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      const response = await api.get("/users/getAll");
+      const response = await api.get(`/users/${userId?.userId}/getAll`);
       return response.data; // Return the fetched events data
     } catch (error) {
       const errorMessage = error.response?.data || error.message || "An error occurred";

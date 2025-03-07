@@ -211,7 +211,7 @@ export const verifyUserDetails = async (req, res) => {
 export const connectWithUser = async (req, res) => {
     try {
         const { userId } = req.params; 
-        const { targetUserId } = req.query; 
+        const { targetUserId } = req.query;         
 
         if (userId === targetUserId) {
             return res.status(400).json({
@@ -270,7 +270,7 @@ export const connectWithUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
     try {
         // Extract the logged-in user's ID from the request (assuming it's stored in req.user._id)
-        const loggedInUserId = req.params;
+        const loggedInUserId = req.params.userId;        
 
         // Fetch all users except the logged-in user
         const users = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
