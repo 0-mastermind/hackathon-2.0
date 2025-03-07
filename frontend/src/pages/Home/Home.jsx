@@ -13,7 +13,7 @@ const Home = () => {
         <div className='nav-links'>
           <div className='auth-buttons'>
             <a href='login' className='auth-btn'>Log In</a>
-            <a href='signup' className='auth-btn'>Sign Up</a>
+            <a href='/role' className='auth-btn'>Sign Up</a>
           </div>
         </div>
       </nav>

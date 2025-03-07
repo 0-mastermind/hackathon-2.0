@@ -2,11 +2,11 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../../utils/axios.utils";
 
 // Async thunk for creating a user account
-export const createUserAccount = createAsyncThunk(
-  "signup/createUserAccount",
-  async (userData, { rejectWithValue }) => {
+export const connectUser = createAsyncThunk(
+  "user/follow",
+  async ({userData, targetId}, { rejectWithValue }) => {
     try {
-      const response = await api.post("/users/register", userData);
+      const response = await api.post(`/users/${userId}/register?targetUserId=${targetId}`, userData);
       return response; // Return response data on success
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message || "An error occurred";
@@ -49,7 +49,7 @@ const signupSlice = createSlice({
         state.success = null;
       })
       .addCase(createUserAccount.fulfilled, (state, action) => {
-        const userData = action.payload.data.userData;
+        const userData = action.payload.data;
         localStorage.setItem("AUTH_DATA", JSON.stringify(userData));
         state.loading = false;
         state.success = "Account created successfully!";

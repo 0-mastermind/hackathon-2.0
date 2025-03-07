@@ -46,7 +46,7 @@ export const signUp = async (req, res) => {
             success: true,
             message: "User registered successfully",
             userData: {
-                createdUser,
+                userId: createdUser._id,
                 success: true,
             },
         });

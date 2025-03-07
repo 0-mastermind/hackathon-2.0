@@ -47,14 +47,14 @@ const Login = () => {
 
       <div className="login-container">
         <div className="login-header">
-          <i className="fas fa-user-circle"></i>
+          {/* <i className="fas fa-user-circle"></i> */}
           <h1>Welcome Back</h1>
           <p>Please enter your details</p>
         </div>
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <i className="fas fa-envelope"></i>
+            {/* <i className="fas fa-envelope"></i> */}
             <input
               type="email"
               name="email"
@@ -67,7 +67,7 @@ const Login = () => {
           </div>
 
           <div className="form-group">
-            <i className="fas fa-lock"></i>
+            {/* <i className="fas fa-lock"></i> */}
             <input
               type="password"
               name="password"

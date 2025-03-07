@@ -1,33 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import { createUserAccount, setUserDetails } from "../../store/features/auth/signup.slice";
 import "./Sign.css";
 
 const Sign = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize useNavigate
-  const signupData = useSelector((state) => state.signup); // Access the signup state
+  const navigate = useNavigate();
+  const signupData = useSelector((state) => state.signup);
+  
+  useEffect(() => {
+    if (!signupData.accountType) {
+      navigate("/role");
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Extract user details from the state
-    const { name, email, password, confirmPassword } = signupData;
+    const { name, email, password, confirmPassword, accountType } = signupData;
 
     // Dispatch the signup action with user details
-    dispatch(createUserAccount({ name, email, password, confirmPassword }));
+    dispatch(createUserAccount({ name, email, password, confirmPassword, accountType }));
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(setUserDetails({ name, value })); // Update the state
+    dispatch(setUserDetails({ name, value }));
   };
 
   // Redirect to login page after successful signup
   React.useEffect(() => {
     if (signupData.success) {
-      navigate("/login"); // Redirect to login page on successful signup
+      navigate("/login");
     }
   }, [signupData.success, navigate]);
 
@@ -46,52 +52,52 @@ const Sign = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <i className="fas fa-user"></i>
+            {/* <i className="fas fa-user"></i> */}
             <input
               type="text"
               name="name"
               className="form-input"
               placeholder="Name"
-              value={signupData.name} // Controlled input
+              value={signupData.name}
               onChange={handleChange}
               required
             />
           </div>
 
           <div className="form-group">
-            <i className="fas fa-envelope"></i>
+            {/* <i className="fas fa-envelope"></i> */}
             <input
               type="email"
               name="email"
               className="form-input"
               placeholder="Email address"
-              value={signupData.email} // Controlled input
+              value={signupData.email}
               onChange={handleChange}
               required
             />
           </div>
 
           <div className="form-group">
-            <i className="fas fa-lock"></i>
+            {/* <i className="fas fa-lock"></i> */}
             <input
               type="password"
               name="password"
               className="form-input"
               placeholder="Password"
-              value={signupData.password} // Controlled input
+              value={signupData.password}
               onChange={handleChange}
               required
             />
           </div>
 
           <div className="form-group">
-            <i className="fas fa-lock"></i>
+            {/* <i className="fas fa-lock"></i> */}
             <input
               type="password"
               name="confirmPassword"
               className="form-input"
               placeholder="Confirm Password"
-              value={signupData.confirmPassword} // Controlled input
+              value={signupData.confirmPassword}
               onChange={handleChange}
               required
             />
@@ -104,10 +110,10 @@ const Sign = () => {
           {signupData.success && <p className="success-message">{signupData.success}</p>}
 
           <div className="signup-button-container">
-            <a href="/login">Already have account? Login </a>
+            <a href="/login">Already have an account? Login</a>
             <button type="submit" className="signup-btn" disabled={signupData.loading}>
               {signupData.loading ? (
-                <i className="fas fa-spinner fa-spin"></i> // Loading spinner
+                <i className="fas fa-spinner fa-spin"></i>
               ) : (
                 <>
                   <i className="fas fa-user-plus"></i> Sign Up
