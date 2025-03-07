@@ -107,7 +107,6 @@ export const applyForOpportunity = async (req, res) => {
             message: "Successfully applied for the opportunity.",
             opportunity,
         });
-
     } catch (error) {
         console.error("Error applying for opportunity:", error);
         return res.status(500).json({

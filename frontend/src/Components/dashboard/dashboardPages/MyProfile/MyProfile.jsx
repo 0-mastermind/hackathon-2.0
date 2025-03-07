@@ -1,50 +1,55 @@
 import React from "react";
-import "./MyProfile.css"; // Import the CSS file
+import "./ViewProfile.css"; // Import the CSS file
 
-const MyProfile = () => {
+const ViewProfile = () => {
+  // Static user data (dummy data)
   const user = {
     name: "John Doe",
-    profile: "Alumni",
-    college: "Harvard University",
-    description:
-      "Passionate about web development and design. Currently pursuing a degree in Computer Science.",
-    skills: ["CSS", "HTML", "C++", "Java"],
-    avatar: "https://via.placeholder.com/100", // Placeholder image
+    email: "john.doe@example.com",
+    profilePicture: "https://via.placeholder.com/150", // Placeholder image
+    bio: "I am a software developer with a passion for building scalable and user-friendly applications.",
+    location: "New York, USA",
+    skills: ["JavaScript", "React", "Node.js", "MongoDB"],
   };
 
   return (
-    <div className="profile-container">
-      {/* Top Section */}
-      <div className="top-section">
-        <div className="avatar-container">
-          <img src={user.avatar} alt="User Avatar" className="avatar" />
-        </div>
-        <div className="profile-info">
-          <h1 className="name">{user.name}</h1>
-          <p className="college">{user.college}</p>
-          <p className="profile-type">{user.profile}</p>
-        </div>
-        <button className="connect-button">Connect</button>
-      </div>
+    <div className="view-profile-container">
+      <h1 className="profile-heading">Your Profile</h1>
 
-      {/* Description Section */}
-      <div className="description-section">
-        <p>{user.description}</p>
-      </div>
+      <div className="profile-card">
+        {/* Profile Picture */}
+        <div className="profile-picture">
+          <img
+            src={user.profilePicture}
+            alt="Profile"
+            className="profile-image"
+          />
+        </div>
 
-      {/* Skills Section */}
-      <div className="skills-section">
-        <h2>Skills</h2>
-        <div className="skills-list">
-          {user.skills.map((skill, index) => (
-            <div key={index} className="skill-box">
-              {skill}
+        {/* User Details */}
+        <div className="user-info">
+          <h2 className="user-name">{user.name}</h2>
+          <p className="user-email">{user.email}</p>
+          <p className="user-bio">{user.bio}</p>
+        </div>
+
+        {/* Additional Details (e.g., skills, location) */}
+        <div className="additional-details">
+          <h3>Additional Information</h3>
+          <div className="details-grid">
+            <div className="detail-item">
+              <span className="detail-label">Location:</span>
+              <span className="detail-value">{user.location}</span>
             </div>
-          ))}
+            <div className="detail-item">
+              <span className="detail-label">Skills:</span>
+              <span className="detail-value">{user.skills.join(", ")}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default MyProfile;
+export default ViewProfile;
