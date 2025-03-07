@@ -88,7 +88,7 @@ body {
     color: var(--primary);
 }
 
-/* Clean, modern auth-buttons styles */
+/* Auth buttons */
 .auth-buttons {
     display: flex;
     gap: 20px;
@@ -115,108 +115,45 @@ body {
     text-decoration: none;
 }
 
-/* Keep the icon styles */
-.btn-icon {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s ease;
+.auth-btn:hover {
+    background: var(--hover-light);
+    color: var(--white);
 }
 
-/* Preserve specific styles for login/signup variations if needed */
-.login-btn:hover .btn-icon,
-.signup-btn:hover .btn-icon {
-    transform: translateX(3px);
-}
-
-/* Login Button Style */
-.login-btn {
-    color: #333;
-    background: transparent;
-}
-
-.login-btn:hover {
-    color: #000;
-    background: #f5f5f5;
-}
-
-/* Signup Button Style */
-.signup-btn {
-    color: white;
-    background: #000;
-}
-
-.signup-btn:hover {
-    background: #333;
-    transform: translateY(-1px);
-}
-
-/* Active state for both buttons */
-.auth-btn:active {
-    transform: translateY(1px);
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-    .auth-btn {
-        padding: 8px 20px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 640px) {
-    .auth-buttons {
-        margin-top: 15px;
-    }
-}
-
-/* Hero section styles */
+/* Hero Section */
 .hero {
-    margin-top: 80px;
+    margin-top: 70px;
     padding: 5rem 5%;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: url('./img.jpg');
     color: white;
     text-align: center;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 4rem;
+    overflow: hidden;
+    position: relative;
 }
 
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
+    animation: fadeInUp 1s ease;
 }
 
 .hero-content h1 {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    animation: fadeInUp 1s ease;
+    animation: fadeInUp 1s ease 0.2s;
 }
 
 .hero-content p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.9;
-    animation: fadeInUp 1s ease 0.2s;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background-color: white;
-    color: #2563eb;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: all 0.3s ease;
     animation: fadeInUp 1s ease 0.4s;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .hero-stats {
@@ -254,23 +191,8 @@ body {
     }
 }
 
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .nav-links {
-        gap: 1rem;
-    }
-
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .hero-stats {
-        flex-direction: column;
-        gap: 2rem;
-    }
-}
-
-@media (max-width: 640px) {
     .navbar {
         flex-direction: column;
         padding: 1rem;
@@ -286,15 +208,83 @@ body {
         margin-top: 1rem;
     }
 
-    .hero {
-        margin-top: 200px;
-        padding: 2rem 5%;
+    .hero-content h1 {
+        font-size: 2.5rem;
     }
 
-    .logo-img {
-        width: 32px;
-        height: 32px;
+    .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
     }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+    }
+}
+
+/* Features Section */
+.features-section {
+    padding: 80px 5%;
+    background-color: #f8fafc;
+    text-align: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: #2563eb;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    margin-bottom: 15px;
+    color: #1f2937;
+    text-align: center;
+}
+
+.feature-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    text-align: center;
 }
 
 /* Who Can Join Section */
@@ -350,330 +340,29 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
 }
 
-/* Hover effects for cards */
-.join-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.3),
-        transparent
-    );
-    transition: 0.5s ease;
-}
-
-.join-card:hover::before {
-    left: 100%;
-}
-
-/* Icon animation */
-.card-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 20px;
-    background: #f0f7ff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s ease;
-}
-
-.join-card:hover .card-icon {
-    transform: rotateY(180deg);
-    background: #2563eb;
-}
-
-.card-icon i {
-    font-size: 30px;
-    color: #2563eb;
-    transition: all 0.4s ease;
-}
-
-.join-card:hover .card-icon i {
-    color: white;
-    transform: rotateY(180deg);
-}
-
-/* Title animation */
-.join-card h3 {
-    transition: all 0.3s ease;
-}
-
-.join-card:hover h3 {
-    color: #2563eb;
-    transform: translateX(5px);
-}
-
-/* Description animation */
-.join-card p {
-    transition: all 0.3s ease;
-}
-
-.join-card:hover p {
-    transform: translateX(5px);
-}
-
-/* Add floating animation */
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-.join-card {
-    animation: float 3s ease-in-out infinite;
-}
-
-/* Ensure smooth animation on hover while floating */
-.join-card:hover {
-    animation: none;
-}
-
-/* Responsive styles for new section */
-@media (max-width: 968px) {
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .cards-container {
-        gap: 30px;
-        padding: 15px;
-    }
-
-    .join-card {
-        padding: 25px;
-    }
-}
-
-@media (max-width: 768px) {
-    .who-can-join {
-        margin-top: 80px;
-        padding: 30px 4%;
-    }
-
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .join-card {
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .card-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .card-icon i {
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 480px) {
-    .section-title {
-        font-size: 1.75rem;
-    }
-
-    .who-can-join {
-        padding: 20px 4%;
-    }
-
-    .join-card {
-        padding: 20px;
-    }
-
-    .join-card h3 {
-        font-size: 1.25rem;
-    }
-
-    .join-card p {
-        font-size: 0.95rem;
-    }
-}
-
-/* New sections styles */
-.features-section {
-    padding: 80px 5%;
-    background-color: #f8fafc;
+/* Footer */
+footer {
+    padding: 20px 5%;
+    background-color: var(--white);
     text-align: center;
+    border-top: 1px solid #e5e7eb;
 }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.feature-card {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-card i {
-    font-size: 2.5rem;
-    color: #2563eb;
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    margin-bottom: 15px;
-    color: #1f2937;
-    text-align: center;
-}
-
-.feature-card p {
-    color: #6b7280;
-    line-height: 1.6;
-    text-align: center;
-}
-
-/* Stats Section */
-.stats-section {
-    padding: 60px 5%;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    color: white;
-}
-
-.stats-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: bold;
+.left-links {
     margin-bottom: 10px;
 }
 
-.stat-label {
-    font-size: 1.1rem;
-    opacity: 0.9;
+.left-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    margin: 0 10px;
 }
 
-/* Testimonials Section */
-.testimonials-section {
-    padding: 80px 5%;
-    background-color: white;
+.left-links a:hover {
+    color: var(--primary);
 }
 
-.testimonials-container {
-    display: flex;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.testimonial-card {
-    flex: 1;
-    min-width: 300px;
-    max-width: 500px;
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.testimonial-content {
-    position: relative;
-}
-
-.testimonial-content i {
-    font-size: 1.5rem;
-    color: #2563eb;
-    margin-bottom: 15px;
-}
-
-.testimonial-content p {
-    font-style: italic;
-    color: #4b5563;
-    margin-bottom: 20px;
-    line-height: 1.6;
-}
-
-.testimonial-author h4 {
-    color: #1f2937;
-    margin-bottom: 5px;
-}
-
-.testimonial-author span {
-    color: #6b7280;
+.copyright {
     font-size: 0.9rem;
+    color: var(--text-light);
 }
-
-/* Responsive Styles for New Sections */
-@media (max-width: 768px) {
-    .features-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-    }
-
-    .stats-container {
-        gap: 30px;
-    }
-
-    .stat-number {
-        font-size: 2rem;
-    }
-
-    .testimonial-card {
-        min-width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .features-section,
-    .stats-section,
-    .testimonials-section {
-        padding: 40px 4%;
-    }
-
-    .feature-card {
-        padding: 20px;
-    }
-
-    .stat-number {
-        font-size: 1.75rem;
-    }
-
-    .stat-label {
-        font-size: 1rem;
-    }
-}
-
