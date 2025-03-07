@@ -4,6 +4,10 @@ import signupSlice from "./features/auth/signup.slice";
 import getEventSlice from "./features/event/event.slice";
 import getAllUserSlice from "./features/user/getAll.slice";
 import getPostSlice from "./features/post/post.slice";
+<<<<<<< HEAD
+=======
+import connectToUserSlice from "./features/connect/connect.slice";
+>>>>>>> refs/remotes/origin/main
 
 const featuresStore = configureStore({
     reducer: {
@@ -11,7 +15,8 @@ const featuresStore = configureStore({
         signup: signupSlice,
         getEvent : getEventSlice,
         getAllUsers: getAllUserSlice,                                                                                       
-        getPost : getPostSlice
+        getPost : getPostSlice,
+        followUser: connectToUserSlice
     },
 });
 

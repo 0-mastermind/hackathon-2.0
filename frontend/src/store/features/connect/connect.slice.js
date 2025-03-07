@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../../utils/axios.utils";
 
-// Async thunk for creating a user account
+// Async thunk for connecting users
 export const connectUser = createAsyncThunk(
   "user/follow",
-  async ({userId, targetId}, { rejectWithValue }) => {
+  async ({ userId, targetId }, { rejectWithValue }) => {
     try {
-      const response = await api.post(`/users/${userId}/register?targetUserId=${targetId}`, userData);
-      return response; // Return response data on success
+      const response = await api.post(`/users/${userId}/connect?targetUserId=${targetId}`);
+      // Return only the necessary data from the response
+      return response.data; // Ensure only serializable data is returned
     } catch (error) {
       const errorMessage = error.response?.data?.message || error.message || "An error occurred";
       return rejectWithValue(errorMessage); // Ensure error is a string
@@ -16,52 +17,45 @@ export const connectUser = createAsyncThunk(
 );
 
 const initialState = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
   loading: false,
-  error: null, // Ensure error is a string
-  success: null,
-  accountType: null // Ensure success is a string
+  error: null,
+  success: false,
+  message: null, // Add a message field to store success messages
 };
 
-// Signup slice
-const connectToUser = createSlice({
-  name: "signup",
+// Slice for connecting users
+const connectToUserSlice = createSlice({
+  name: "connectUser",
   initialState,
   reducers: {
-    // Reducer for setting user details
-    setUserDetails: (state, action) => {
-      const { name, value } = action.payload;
-      state[name] = value;
-    },
-    setType: (state, action) => {
-      const type = action.payload;
-      state.accountType = type;
+    // Reducer for resetting the state
+    resetConnectState: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.success = false;
+      state.message = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createUserAccount.pending, (state) => {
+      .addCase(connectUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-        state.success = null;
+        state.success = false;
+        state.message = null;
       })
-      .addCase(createUserAccount.fulfilled, (state, action) => {
-        const userData = action.payload.data;
-        localStorage.setItem("AUTH_DATA", JSON.stringify(userData));
+      .addCase(connectUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = "Account created successfully!";
-        state.message = action.payload // Ensure success is a string
+        state.success = true;
+        state.message = action.payload.message; // Store the success message
       })
-      .addCase(createUserAccount.rejected, (state, action) => {
+      .addCase(connectUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; // Ensure error is a string
+        state.error = action.payload; // Store the error message
       });
   },
 });
 
 // Export actions and reducer
-export const { setUserDetails, setType } = connectToUser.actions;
-export default connectToUser.reducer;
+export const { resetConnectState } = connectToUserSlice.actions;
+export default connectToUserSlice.reducer;
