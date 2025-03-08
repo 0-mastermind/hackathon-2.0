@@ -24,9 +24,12 @@ const Connect = () => {
 
   // Update the users state when userData is successfully fetched
   useEffect(() => {
-    if (userData.success && userData.events?.users) {
+    if (userData.success  ) {
       setUsers(userData.events.users);
     }
+
+    console.log(userData);
+    
   }, [userData.success, userData.events?.users]);
 
   // Handle follow button click
